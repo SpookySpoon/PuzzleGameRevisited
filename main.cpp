@@ -2,14 +2,14 @@
 #include <QPushButton>
 #include <QDebug>
 #include "congratulator.h"
-#include "puzzlemanager.h"
+#include "gameengine.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 //    Congratulator obana;
 //    obana.prepareWindow(QPair<int,int>(15,15));
-    PuzzleManager ee;
+    GameEngine ee;
 
     return a.exec();
 }

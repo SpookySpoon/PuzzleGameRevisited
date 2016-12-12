@@ -11,7 +11,6 @@ PuzzleManager::PuzzleManager(QObject* parent):QObject(parent)
     }
     initialOrder<<" ";
     currentOrder=initialOrder;
-    connect(this,SIGNAL(assignedOrder(QList<QString>)),this,SLOT(testSlot(QList<QString>)));
 }
 
 

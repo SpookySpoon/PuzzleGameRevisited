@@ -23,6 +23,8 @@ private:
 
 private slots:
     void arrangePuzzle(QList<QString>);
+    void showTime(int);
+    void showMoves(int);
 };
 
 #endif // PUZZLEFORM_H

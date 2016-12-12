@@ -20,7 +20,7 @@ private:
     Ui::PuzzleForm *ui;
     Congratulator *cong;
     PuzzleForm *pF;
-    ScoreKeeper *sC;
+    ScoreKeeper *sK;
 private slots:
     void newGame();
     void tryAgain();

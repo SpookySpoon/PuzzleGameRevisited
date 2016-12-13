@@ -1,4 +1,6 @@
 #include <QDateTime>
+#include <QDebug>
+#include <QCloseEvent>
 #include "congratulatorui.h"
 #include "ui_congratswindow.h"
 
@@ -33,4 +35,10 @@ void CongratulatorUI::setBestComboGameTime(int value)
 void CongratulatorUI::setBestComboGameMoves(int value)
 {
     ui->lableHistComboMoves->setText(QString("Number of moves: %1").arg(value));
+}
+
+void CongratulatorUI::closeEvent(QCloseEvent *event)
+{
+    emit isClosed();
+    event->accept();
 }

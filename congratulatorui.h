@@ -13,6 +13,8 @@ public:
     explicit CongratulatorUI(Ui::CongratsWindow *ui,  QWidget* parent = nullptr);
 private:
     Ui::CongratsWindow *ui;
+protected:
+    void closeEvent(QCloseEvent *event) override;
 private slots:
     void setGameTime(int);
     void setGameMoves(int);
@@ -20,6 +22,8 @@ private slots:
     void setBestGameMoves(int);
     void setBestComboGameTime(int);
     void setBestComboGameMoves(int);
+signals:
+    void isClosed();
 };
 
 #endif // CONGRATULATORUI_H

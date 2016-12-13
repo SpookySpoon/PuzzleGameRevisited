@@ -39,5 +39,6 @@ void ScoreKeeper::stopTracking()
     {
         timer.stop();
     }
-    emit reportScore(QPair<int,int>(elapsedSeconds,numberOfMoves));
+    const QPair<int,int> stopSignal(elapsedSeconds,numberOfMoves);
+    emit reportScore(stopSignal);
 }

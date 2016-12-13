@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
 //    Congratulator obana;
 //    obana.prepareWindow(QPair<int,int>(15,15));
     GameEngine ee;
-
     return a.exec();
 }
 

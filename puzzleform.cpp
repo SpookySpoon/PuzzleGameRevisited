@@ -5,18 +5,14 @@
 PuzzleForm::PuzzleForm(Ui::PuzzleForm *someUi, QWidget *parent) :
     QWidget(parent),
     ui(someUi)
-{
-
-
-//    puzzlePieces
-}
+{}
 
 PuzzleForm::~PuzzleForm()
 {
     delete ui;
 }
 
-void PuzzleForm::arrangePuzzle(QList<QString> order)
+void PuzzleForm::arrangePuzzle(const QList<QString>& order)
 {
     for (int i_row=0;i_row<4;i_row++)
     {

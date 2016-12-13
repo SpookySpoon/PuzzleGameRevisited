@@ -1,17 +1,18 @@
 #include "scorehandler.h"
 #include "scoremanager.h"
+#include <QDebug>
 
 ScoreHandler::ScoreHandler(QObject *parent):QObject (parent)
 {}
 
-void ScoreHandler::initScoreData(QPair<int,int> results)
+void ScoreHandler::initScoreData(const QPair<int,int>& results)
 {
     scoreManager::updateScore(results.first,results.second);
     inputData(results);
     emit statsReady();
 }
 
-void ScoreHandler::initScoreDataNoRecord(QPair<int,int> results)
+void ScoreHandler::initScoreDataNoRecord(const QPair<int,int>& results)
 {
     inputData(results);
     emit statsReady();
@@ -20,10 +21,11 @@ void ScoreHandler::initScoreDataNoRecord(QPair<int,int> results)
 void ScoreHandler::resetHistory()
 {
     scoreManager::resetScore(gameTime,gameMoves);
-    inputData(QPair<int,int>(gameTime,gameMoves));
+    QPair<int,int> currentStats(gameTime,gameMoves);
+    inputData(currentStats);
 }
 
-void ScoreHandler::inputData(QPair<int,int> results)
+void ScoreHandler::inputData(const QPair<int,int>& results)
 {
     gameTime=results.first;
     gameMoves=results.second;

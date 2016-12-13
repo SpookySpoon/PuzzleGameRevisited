@@ -16,13 +16,11 @@ class PuzzleForm : public QWidget
 public:
     explicit PuzzleForm(Ui::PuzzleForm *ui, QWidget *parent = 0);
     ~PuzzleForm();
-
 private:
     Ui::PuzzleForm *ui;
     QMap<QString,QPushButton*> puzzlePieces;
-
 private slots:
-    void arrangePuzzle(QList<QString>);
+    void arrangePuzzle(const QList<QString>&);
     void showTime(int);
     void showMoves(int);
 };

@@ -14,20 +14,16 @@ class Congratulator: public QObject
 {
     Q_OBJECT
 public:
-    Congratulator(QObject* parent=nullptr);
-    bool getGR();
+    Congratulator(const QPair<int,int>& results, bool gameRegime, QObject* parent=nullptr);
+    ~Congratulator();
 private:
     ScoreHandler *sHandler;
     CongratulatorUI *conWindow;
     Ui::CongratsWindow *ui;
-    bool gameRegime=true;
     void setConnections();
 public slots:
-    void prepareWindow(QPair<int,int>);
-    void setGameRegime(bool);
     void showWindow();
 signals:
-    void initScoreHandler(QPair<int,int>);
-    void initScoreHandlerNoRecord(QPair<int,int>);
-
+    void initScoreHandler(const QPair<int,int>&);
+    void initScoreHandlerNoRecord(const QPair<int,int>&);
 };

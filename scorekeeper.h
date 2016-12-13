@@ -22,5 +22,6 @@ protected:
 signals:
     void reportTime(int);
     void reportMoves(int);
-    void reportScore(QPair<int,int>);
+    void reportScore(const QPair<int,int>&);
+
 };

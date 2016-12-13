@@ -3,7 +3,6 @@
 
 class PuzzleManager;
 class ScoreKeeper;
-class Congratulator;
 class PuzzleForm;
 namespace Ui {
 class PuzzleForm;
@@ -18,16 +17,16 @@ public:
 private:
     PuzzleManager *pM;
     Ui::PuzzleForm *ui;
-    Congratulator *cong;
     PuzzleForm *pF;
     ScoreKeeper *sK;
+    bool gameRegime=true;
 private slots:
     void newGame();
     void tryAgain();
     void cheat();
-//    void close();
+    void onWin(const QPair<int,int>& stats);
+    void close();
 signals:
-    void changeGameRegime(bool);
     void callNewGame();
     void callTryAgain();
     void cheatTest();

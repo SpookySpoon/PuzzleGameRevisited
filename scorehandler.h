@@ -13,11 +13,11 @@ private:
     int bestGameMoves;
     int bestComboGameTime;
     int bestComboGameMoves;
-    void inputData(QPair<int,int>);
+    void inputData(const QPair<int,int>&);
     void reportData();
 private slots:
-    void initScoreData(QPair<int,int>);
-    void initScoreDataNoRecord(QPair<int,int>);
+    void initScoreData(const QPair<int,int>&);
+    void initScoreDataNoRecord(const QPair<int,int>&);
     void resetHistory();
 signals:
     void reportGameTime(int);

@@ -14,11 +14,11 @@ private:
     int elapsedSeconds;
     QBasicTimer timer;
 private slots:
-//    void startTracking();
-//    void refreshScore();
-//    void stopTracking();
-//    void onMove();
-//    void onTime();
+    void reset();
+    void stopTracking();
+    void onMove();
+protected:
+    void timerEvent(QTimerEvent *event) override;
 signals:
     void reportTime(int);
     void reportMoves(int);

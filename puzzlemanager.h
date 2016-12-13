@@ -8,13 +8,17 @@ class PuzzleManager: public QObject
 public:
     PuzzleManager(QObject* parent=nullptr);
 private:
-    QList<QString> currentOrder, initialOrder;
+    QList<QString> currentOrder, initialOrder, winningOrder;
     void shuffleButtons();
+    void checkWin();
 private slots:
     void onPushedButton();
     void onRestart();
     void onNewGame();
+    void onCheat();
 signals:
     void assignedOrder(QList<QString>);
+    void gameWon();
+    void buttonMoved();
 };
 

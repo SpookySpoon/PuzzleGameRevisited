@@ -24,10 +24,12 @@ private:
 private slots:
     void newGame();
     void tryAgain();
+    void cheat();
 //    void close();
 signals:
     void changeGameRegime(bool);
     void callNewGame();
     void callTryAgain();
+    void cheatTest();
 
 };

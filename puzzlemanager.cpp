@@ -4,21 +4,39 @@
 
 PuzzleManager::PuzzleManager(QObject* parent):QObject(parent)
 {
-    qDebug()<<"constructing order";
     for (int i=1;i<=15;i++)
     {
-        initialOrder<<QString("pushButton_%1").arg(i);
+        winningOrder<<QString("pushButton_%1").arg(i);
     }
-    initialOrder<<" ";
-    currentOrder=initialOrder;
+    winningOrder<<" ";
+    currentOrder=winningOrder;
+    initialOrder=winningOrder;
 }
 
+void PuzzleManager::onNewGame()
+{
+    shuffleButtons();
+    initialOrder=currentOrder;
+    emit assignedOrder(currentOrder);
+}
+
+void PuzzleManager::onRestart()
+{
+    currentOrder=initialOrder;
+    emit assignedOrder(currentOrder);
+}
+
+void PuzzleManager::onCheat()
+{
+    currentOrder=winningOrder;
+    currentOrder.replace(15,QString("pushButton_15"));
+    currentOrder.replace(14,QString(" "));
+    emit assignedOrder(currentOrder);
+}
 
 void PuzzleManager::onPushedButton()
 {
-    qDebug()<<"arrived at onPushedButton";
     QString senderW=sender()->objectName();
-    qDebug()<<"sender name is: "<<senderW;
     int index = currentOrder.indexOf(senderW);
     int column = index%4;
     int row = index/4;
@@ -39,6 +57,7 @@ void PuzzleManager::onPushedButton()
                     currentOrder.replace(newIndex,senderW);
                     currentOrder.replace(index,QString(" "));
                     emit assignedOrder(currentOrder);
+                    emit buttonMoved();
                     mark=true;
                     break;
                 }
@@ -47,24 +66,14 @@ void PuzzleManager::onPushedButton()
         else
         {break;}
     }
+    checkWin();
 }
 
-void PuzzleManager::onNewGame()
-{
-    shuffleButtons();
-    initialOrder=currentOrder;
-    emit assignedOrder(currentOrder);
-}
-
-void PuzzleManager::onRestart()
-{
-    currentOrder=initialOrder;
-    emit assignedOrder(currentOrder);
-}
 
 void PuzzleManager::shuffleButtons()
 {
     QList<QString> randPick=initialOrder;
+    randPick.removeLast();
     currentOrder.clear();
     srand (time(NULL));
     while(!randPick.isEmpty())
@@ -73,4 +82,12 @@ void PuzzleManager::shuffleButtons()
         currentOrder<<randPick.takeAt(iSecret);
     }
     currentOrder<<" ";
+}
+
+void PuzzleManager::checkWin()
+{
+    if(currentOrder==winningOrder)
+    {
+        emit gameWon();
+    }
 }

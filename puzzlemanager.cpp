@@ -22,8 +22,6 @@ void PuzzleManager::onPushedButton()
     int index = currentOrder.indexOf(senderW);
     int column = index%4;
     int row = index/4;
-    qDebug()<<"index is: "<<index;
-    qDebug()<<"column is: "<<column<<" and row is: "<<row;
     bool mark=false;
     for (int switchRowColumn=0; switchRowColumn<=1;switchRowColumn++)
     {
@@ -41,9 +39,6 @@ void PuzzleManager::onPushedButton()
                     currentOrder.replace(newIndex,senderW);
                     currentOrder.replace(index,QString(" "));
                     emit assignedOrder(currentOrder);
-                    qDebug()<<"new order was announced";
-                    qDebug()<<"one to last item"<<currentOrder.at(14);
-                    qDebug()<<"last item"<<currentOrder.at(15);
                     mark=true;
                     break;
                 }

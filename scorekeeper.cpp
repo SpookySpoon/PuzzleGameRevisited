@@ -4,3 +4,10 @@ ScoreKeeper::ScoreKeeper(QObject* parent):QObject(parent)
 {
 
 }
+
+
+//void ScoreKeeper::startTracking()
+//{
+
+
+//}

@@ -27,6 +27,8 @@ GameEngine::GameEngine(QObject* parent)
     connect(this,SIGNAL(changeGameRegime(bool)),cong,SLOT(setGameRegime(bool)));
     connect(ui->buttonRestart,SIGNAL(clicked()),this,SLOT(tryAgain()));
     connect(ui->buttonShuffle,SIGNAL(clicked()),this,SLOT(newGame()));
+    connect(this,SIGNAL(callNewGame()),pM,SLOT(onNewGame()));
+    connect(this,SIGNAL(callTryAgain()),pM,SLOT(onRestart()));
     connect(sK,SIGNAL(reportScore(QPair<int,int>)),cong,SLOT(prepareWindow(QPair<int,int>)));
     connect(sK,SIGNAL(reportMoves(int)),pF,SLOT(showMoves(int)));
     connect(sK,SIGNAL(reportTime(int)),pF,SLOT(showTime(int)));
@@ -42,6 +44,6 @@ void GameEngine::newGame()
 
 void GameEngine::tryAgain()
 {
-    emit changeGameRegime(false);
     emit callTryAgain();
+    emit changeGameRegime(false);
 }

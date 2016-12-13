@@ -32,7 +32,7 @@ GameEngine::GameEngine(QObject* parent)
     connect(sK,SIGNAL(reportScore(QPair<int,int>)),cong,SLOT(prepareWindow(QPair<int,int>)));
     connect(sK,SIGNAL(reportMoves(int)),pF,SLOT(showMoves(int)));
     connect(sK,SIGNAL(reportTime(int)),pF,SLOT(showTime(int)));
-    pF->show();
+//    pF->show();
 }
 
 

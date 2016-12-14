@@ -18,13 +18,15 @@ void PuzzleManager::onNewGame()
 {
     shuffleButtons();
     initialOrder=currentOrder;
-    emit assignedOrder(currentOrder);
+    QVariant orderInfo=QVariant(currentOrder);
+    emit assignedOrder(orderInfo);
 }
 
 void PuzzleManager::onRestart()
 {
     currentOrder=initialOrder;
-    emit assignedOrder(currentOrder);
+    QVariant orderInfo=QVariant(currentOrder);
+    emit assignedOrder(orderInfo);
 }
 
 void PuzzleManager::onCheat()
@@ -32,7 +34,8 @@ void PuzzleManager::onCheat()
     currentOrder=winningOrder;
     currentOrder.replace(15,QString("pushButton_15"));
     currentOrder.replace(14,QString(" "));
-    emit assignedOrder(currentOrder);
+    QVariant orderInfo=QVariant(currentOrder);
+    emit assignedOrder(orderInfo);
 }
 
 void PuzzleManager::onPushedButton()
@@ -67,7 +70,8 @@ void PuzzleManager::onPushedButton()
 //                    opa.exec();
                     currentOrder.replace(newIndex,senderW);
                     currentOrder.replace(index,QString(" "));
-                    emit assignedOrder(currentOrder);
+                    QVariant orderInfo=QVariant(currentOrder);
+                    emit assignedOrder(orderInfo);
                     emit buttonMoved();
                     mark=true;
                     break;

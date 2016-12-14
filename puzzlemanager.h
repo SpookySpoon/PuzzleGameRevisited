@@ -17,7 +17,7 @@ private slots:
     void onNewGame();
     void onCheat();
 signals:
-    void assignedOrder(const QList<QString>&);
+    void assignedOrder(const QVariant&);
     void gameWon();
     void buttonMoved();
 };

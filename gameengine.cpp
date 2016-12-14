@@ -31,7 +31,7 @@ GameEngine::GameEngine(QObject* parent)
     connect(this,SIGNAL(callTryAgain()),sK,SLOT(reset()));
     connect(this,SIGNAL(cheatTest()),pM,SLOT(onCheat()));
 
-    connect(pM,SIGNAL(assignedOrder(const QList<QString>&)),pF,SLOT(arrangePuzzle(const QList<QString>&)));
+    connect(pM,SIGNAL(assignedOrder(const QVariant&)),pF,SLOT(arrangePuzzle(const QVariant&)));
     connect(pM,SIGNAL(buttonMoved()),sK,SLOT(onMove()));
     connect(pM,SIGNAL(gameWon()),sK,SLOT(stopTracking()));
 

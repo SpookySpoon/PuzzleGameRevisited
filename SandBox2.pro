@@ -6,6 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = SomeLib
 TEMPLATE = lib
 CONFIG += staticlib
+#//_____________________________________
 
 #QT  += core gui widgets
 
@@ -16,6 +17,7 @@ CONFIG += staticlib
 ##CONFIG -= app_bundle
 
 #TEMPLATE = app
+##//_____________________________________
 
 SOURCES += main.cpp \
     congratulator.cpp \

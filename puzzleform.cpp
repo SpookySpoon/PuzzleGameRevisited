@@ -12,8 +12,9 @@ PuzzleForm::~PuzzleForm()
     delete ui;
 }
 
-void PuzzleForm::arrangePuzzle(const QList<QString>& order)
+void PuzzleForm::arrangePuzzle(const QVariant& varOrder)
 {
+    QStringList order = varOrder.toStringList();
     for (int i_row=0;i_row<4;i_row++)
     {
         for (int i_col=0;i_col<4;i_col++)

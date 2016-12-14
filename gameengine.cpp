@@ -60,9 +60,15 @@ void GameEngine::cheat()
     emit cheatTest();
 }
 
+bool GameEngine::getRegime() const
+{
+    return gameRegime;
+}
+
 void GameEngine::onWin(const QPair<int,int>& results)
 {
     Congratulator* congratsWindow=new Congratulator(results, gameRegime, this);
+    congratsWindow->setObjectName(QString("Congratulator"));
     congratsWindow->setUpCongratulator();
 }
 

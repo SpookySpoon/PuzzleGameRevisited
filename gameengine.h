@@ -14,6 +14,7 @@ class GameEngine: public QObject
     Q_OBJECT
 public:
     GameEngine(QObject* parent=nullptr);
+    bool getRegime() const;
 private:
     PuzzleManager *pM=nullptr;
     Ui::PuzzleForm *ui=nullptr;

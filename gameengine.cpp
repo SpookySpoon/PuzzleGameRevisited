@@ -62,7 +62,8 @@ void GameEngine::cheat()
 
 void GameEngine::onWin(const QPair<int,int>& results)
 {
-    new Congratulator(results, gameRegime, this);
+    Congratulator* congratsWindow=new Congratulator(results, gameRegime, this);
+    congratsWindow->setUpCongratulator();
 }
 
 void GameEngine::close()

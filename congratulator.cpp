@@ -6,28 +6,41 @@
 #include "gameengine.h"
 
 Congratulator::Congratulator(const QPair<int,int>& results, bool regime, QObject *parent)
-    :QObject(parent)
+    :QObject(parent),stats(results), gameRegime(regime)
+{}
+
+Congratulator::~Congratulator()
+{
+    qDebug()<<"destroy";
+    if(!conWindow->isHidden())
+    {
+        qDebug()<<"hide";
+        conWindow->hide();
+    }
+    conWindow->deleteLater();
+    delete ui;
+}
+
+void Congratulator::setUpCongratulator()
 {
     ui=new Ui::CongratsWindow;
     conWindow = new CongratulatorUI(ui);
     ui->setupUi(conWindow);
     sHandler = new ScoreHandler(this);
     setConnections();
-    if(regime)
+    if(gameRegime)
     {
         ui->lableCheers->setText("Congratulations, you've solved a broblem!!");
-        emit initScoreHandler(results);
+        emit initScoreHandler(stats);
     }
     else
     {
         ui->lableCheers->setText("Nice practise, now go play it for real!");
-        emit initScoreHandlerNoRecord(results);
+        emit initScoreHandlerNoRecord(stats);
     }
 }
-Congratulator::~Congratulator()
-{
-    delete ui;
-}
+
+
 void Congratulator::showWindow()
 {
     conWindow->exec();
@@ -50,21 +63,16 @@ void Congratulator::setConnections()
 
     if(engine)
     {
-        connect(ui->buttonNewGame,SIGNAL(clicked()),conWindow,SLOT(hide()));
-        connect(ui->buttonNewGame,SIGNAL(clicked()),conWindow,SLOT(deleteLater()));
         connect(ui->buttonNewGame,SIGNAL(clicked()),this,SLOT(deleteLater()));
         connect(ui->buttonNewGame,SIGNAL(clicked()),engine,SLOT(newGame()));
 
-        connect(ui->buttonTryAgain,SIGNAL(clicked()),conWindow,SLOT(hide()));
-        connect(ui->buttonTryAgain,SIGNAL(clicked()),conWindow,SLOT(deleteLater()));
         connect(ui->buttonTryAgain,SIGNAL(clicked()),this,SLOT(deleteLater()));
         connect(ui->buttonTryAgain,SIGNAL(clicked()),engine,SLOT(tryAgain()));
 
         connect(ui->buttonQuit,SIGNAL(clicked()),conWindow,SLOT(hide()));
-        connect(ui->buttonQuit,SIGNAL(clicked()),conWindow,SLOT(deleteLater()));
+        connect(ui->buttonQuit,SIGNAL(clicked()),this,SLOT(deleteLater()));
         connect(ui->buttonQuit,SIGNAL(clicked()),engine,SLOT(close()));
 
-        connect(conWindow,SIGNAL(isClosed()),conWindow,SLOT(deleteLater()));
         connect(conWindow,SIGNAL(isClosed()),this,SLOT(deleteLater()));
         connect(conWindow,SIGNAL(isClosed()),engine,SLOT(newGame()));
 

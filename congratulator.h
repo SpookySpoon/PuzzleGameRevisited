@@ -16,10 +16,13 @@ class Congratulator: public QObject
 public:
     Congratulator(const QPair<int,int>& results, bool gameRegime, QObject* parent=nullptr);
     ~Congratulator();
+    void setUpCongratulator();
 private:
-    ScoreHandler *sHandler;
-    CongratulatorUI *conWindow;
-    Ui::CongratsWindow *ui;
+    QPair<int,int> stats;
+    bool gameRegime;
+    ScoreHandler *sHandler=nullptr;
+    CongratulatorUI *conWindow=nullptr;
+    Ui::CongratsWindow *ui=nullptr;
     void setConnections();
 public slots:
     void showWindow();

@@ -15,10 +15,10 @@ class GameEngine: public QObject
 public:
     GameEngine(QObject* parent=nullptr);
 private:
-    PuzzleManager *pM;
-    Ui::PuzzleForm *ui;
-    PuzzleForm *pF;
-    ScoreKeeper *sK;
+    PuzzleManager *pM=nullptr;
+    Ui::PuzzleForm *ui=nullptr;
+    PuzzleForm *pF=nullptr;
+    ScoreKeeper *sK=nullptr;
     bool gameRegime=true;
 private slots:
     void newGame();

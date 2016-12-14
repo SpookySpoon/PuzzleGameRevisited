@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QMessageBox>
 #include "puzzlemanager.h"
 #include "time.h"
 
@@ -41,6 +42,13 @@ void PuzzleManager::onPushedButton()
     int column = index%4;
     int row = index/4;
     bool mark=false;
+
+//    QMessageBox opa1;
+//    opa1.setText(QString("attempting to move Button %1").arg(senderW));
+//    opa1.exec();
+
+
+
     for (int switchRowColumn=0; switchRowColumn<=1;switchRowColumn++)
     {
         if(!mark)
@@ -54,6 +62,9 @@ void PuzzleManager::onPushedButton()
                 int newIndex=tempRow*4+tempCol;
                 if(currentOrder.at(newIndex)==" ")
                 {
+//                    QMessageBox opa;
+//                    opa.setText(QString("moving Button %1").arg(senderW));
+//                    opa.exec();
                     currentOrder.replace(newIndex,senderW);
                     currentOrder.replace(index,QString(" "));
                     emit assignedOrder(currentOrder);

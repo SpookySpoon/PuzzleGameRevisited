@@ -17,8 +17,7 @@ public:
     explicit PuzzleForm(Ui::PuzzleForm *ui, QWidget *parent = 0);
     ~PuzzleForm();
 private:
-    Ui::PuzzleForm *ui;
-    QMap<QString,QPushButton*> puzzlePieces;
+    Ui::PuzzleForm *ui=nullptr;
 private slots:
     void arrangePuzzle(const QList<QString>&);
     void showTime(int);

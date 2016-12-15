@@ -1,9 +1,12 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "puzzlemanager.h"
-#include "time.h"
+#include "staticfunctions.h"
+#include "ui_puzzleform.h"
 
-PuzzleManager::PuzzleManager(QObject* parent):QObject(parent)
+
+PuzzleManager::PuzzleManager(Ui::PuzzleForm *someUiPuzForm, QObject* parent)
+    :QObject(parent), uiPuzForm(someUiPuzForm)
 {
     for (int i=1;i<=15;i++)
     {
@@ -16,17 +19,15 @@ PuzzleManager::PuzzleManager(QObject* parent):QObject(parent)
 
 void PuzzleManager::onNewGame()
 {
-    shuffleButtons();
-    initialOrder=currentOrder;
-    QVariant orderInfo=QVariant(currentOrder);
-    emit assignedOrder(orderInfo);
+    StaticFunctions::shuffleList(initialOrder);
+    currentOrder=initialOrder;
+    StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
 }
 
 void PuzzleManager::onRestart()
 {
     currentOrder=initialOrder;
-    QVariant orderInfo=QVariant(currentOrder);
-    emit assignedOrder(orderInfo);
+    StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
 }
 
 void PuzzleManager::onCheat()
@@ -34,69 +35,18 @@ void PuzzleManager::onCheat()
     currentOrder=winningOrder;
     currentOrder.replace(15,QString("pushButton_15"));
     currentOrder.replace(14,QString(" "));
-    QVariant orderInfo=QVariant(currentOrder);
-    emit assignedOrder(orderInfo);
+    StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
 }
 
 void PuzzleManager::onPushedButton()
 {
     QString senderW=sender()->objectName();
-    int index = currentOrder.indexOf(senderW);
-    int column = index%4;
-    int row = index/4;
-    bool mark=false;
-
-//    QMessageBox opa1;
-//    opa1.setText(QString("attempting to move Button %1").arg(senderW));
-//    opa1.exec();
-
-
-
-    for (int switchRowColumn=0; switchRowColumn<=1;switchRowColumn++)
+    if(StaticFunctions::puzzleMover(currentOrder,senderW))
     {
-        if(!mark)
-        {
-            for(int i=-1;i<=1;i+=2)
-            {
-                int tempCol = std::max(column+i*switchRowColumn,0);
-                tempCol=std::min(tempCol,3);
-                int tempRow = std::max(row+i*(1-switchRowColumn),0);
-                tempRow=std::min(tempRow,3);
-                int newIndex=tempRow*4+tempCol;
-                if(currentOrder.at(newIndex)==" ")
-                {
-//                    QMessageBox opa;
-//                    opa.setText(QString("moving Button %1").arg(senderW));
-//                    opa.exec();
-                    currentOrder.replace(newIndex,senderW);
-                    currentOrder.replace(index,QString(" "));
-                    QVariant orderInfo=QVariant(currentOrder);
-                    emit assignedOrder(orderInfo);
-                    emit buttonMoved();
-                    mark=true;
-                    break;
-                }
-            }
-        }
-        else
-        {break;}
+        StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
+        emit buttonMoved();
     }
     checkWin();
-}
-
-
-void PuzzleManager::shuffleButtons()
-{
-    QList<QString> randPick=initialOrder;
-    randPick.removeLast();
-    currentOrder.clear();
-    srand (time(NULL));
-    while(!randPick.isEmpty())
-    {
-        int iSecret = (rand() % (randPick.count()) + 1)-1;
-        currentOrder<<randPick.takeAt(iSecret);
-    }
-    currentOrder<<" ";
 }
 
 void PuzzleManager::checkWin()

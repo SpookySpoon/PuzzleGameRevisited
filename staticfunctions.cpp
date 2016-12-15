@@ -1,10 +1,14 @@
 #include <QFile>
+#include <QMap>
+#include <QDebug>
 #include <QTextStream>
 #include <QMessageBox>
-#include "scoremanager.h"
+#include <time.h>
+#include "staticfunctions.h"
+#include "ui_puzzleform.h"
 
 
-QList<int> scoreManager::getScore()
+QList<int> StaticFunctions::getScore()
 {
     QList<int> results;
     QFile tempFile("MyPuzzleScore.txt");
@@ -30,9 +34,9 @@ QList<int> scoreManager::getScore()
     return results;
 }
 
-void scoreManager::updateScore(const int time, const int moves)
+void StaticFunctions::updateScore(const int time, const int moves)
 {
-    QList<int> currentRecords=scoreManager::getScore();
+    QList<int> currentRecords=StaticFunctions::getScore();
     int bestTime, bestScore, bestTimeComb, bestScoreComb, gamesPlayed;
     if(currentRecords.at(0)>0)
     {
@@ -81,7 +85,7 @@ void scoreManager::updateScore(const int time, const int moves)
     }
 }
 
-void scoreManager::resetScore(const int time, const int moves)
+void StaticFunctions::resetScore(const int time, const int moves)
 {
     QFile tempFile("MyPuzzleScore.txt");
     QString sendResults =QString("%1[::]%2[::]%3[::]%4[::]%5").
@@ -99,3 +103,55 @@ void scoreManager::resetScore(const int time, const int moves)
         noScoreBox.exec();
     }
 }
+
+bool StaticFunctions::puzzleMover(QStringList& order, const QString& button)
+{
+    int indexSpace = order.indexOf(QString(" "));
+    int columnSpace = indexSpace%4;
+    int rowSpace = indexSpace/4;
+    int indexButt = order.indexOf(button);
+    int columnButt = indexButt%4;
+    int rowButt = indexButt/4;
+    int rowDiff=abs(rowSpace-rowButt);
+    int colDiff=abs(columnSpace-columnButt);
+    if(rowDiff+colDiff==1)
+    {
+        order.replace(indexSpace,button);
+        order.replace(indexButt,QString(" "));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void StaticFunctions::transPuzOrder(const QStringList& order, Ui::PuzzleForm* someUiPuzForm)
+{
+    QMap<QWidget*,int> buttMap;
+    for (int i=0;i<someUiPuzForm->gridLayout->count();i++)
+    {
+        QWidget* tempW=someUiPuzForm->gridLayout->itemAt(i)->widget();
+        buttMap.insert(tempW,order.indexOf(tempW->objectName()));
+    }
+    for(auto i:buttMap.keys())
+    {
+        int index=buttMap.value(i);
+        someUiPuzForm->gridLayout->addWidget(i,index/4,index%4);
+    }
+}
+
+void StaticFunctions::shuffleList(QStringList& initialOrder)
+{
+    QStringList randPick=initialOrder;
+    randPick.removeLast();
+    initialOrder.clear();
+    srand (time(NULL));
+    while(!randPick.isEmpty())
+    {
+        int iSecret = (rand() % (randPick.count()) + 1)-1;
+        initialOrder<<randPick.takeAt(iSecret);
+    }
+    initialOrder<<" ";
+}
+

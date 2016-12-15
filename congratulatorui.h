@@ -1,5 +1,4 @@
-#ifndef CONGRATULATORUI_H
-#define CONGRATULATORUI_H
+#pragma once
 
 #include <QDialog>
 
@@ -26,4 +25,3 @@ signals:
     void isClosed();
 };
 
-#endif // CONGRATULATORUI_H

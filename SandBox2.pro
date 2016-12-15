@@ -1,43 +1,43 @@
 
 
-QT  += core gui
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+#QT  += core gui
+#greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = SomeLib
-TEMPLATE = lib
-CONFIG += staticlib
+#TARGET = SomeLib
+#TEMPLATE = lib
+#CONFIG += staticlib
 #//_____________________________________
 
-#QT  += core gui widgets
+QT  += core gui widgets
 
-#CONFIG += c++11
+CONFIG += c++11
 
-#TARGET = SandBox2
-#CONFIG += console
-##CONFIG -= app_bundle
+TARGET = SandBox2
+CONFIG += console
+#CONFIG -= app_bundle
 
-#TEMPLATE = app
+TEMPLATE = app
 ##//_____________________________________
 
 SOURCES += main.cpp \
     congratulator.cpp \
     scorehandler.cpp \
-    scoremanager.cpp \
     congratulatorui.cpp \
     gameengine.cpp \
     puzzleform.cpp \
     puzzlemanager.cpp \
-    scorekeeper.cpp
+    scorekeeper.cpp \
+    staticfunctions.cpp
 
 HEADERS += \
     congratulator.h \
     scorehandler.h \
-    scoremanager.h \
     congratulatorui.h \
     gameengine.h \
     puzzleform.h \
     puzzlemanager.h \
-    scorekeeper.h
+    scorekeeper.h \
+    staticfunctions.h
 
 FORMS += \
     congratswindow.ui \

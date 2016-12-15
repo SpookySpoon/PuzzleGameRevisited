@@ -1,5 +1,4 @@
-#ifndef PUZZLEFORM_H
-#define PUZZLEFORM_H
+#pragma once
 
 #include <QWidget>
 #include <QPushButton>
@@ -19,9 +18,9 @@ public:
 private:
     Ui::PuzzleForm *ui=nullptr;
 private slots:
-    void arrangePuzzle(const QVariant&);
+//    void arrangePuzzle(const QVariant&);
     void showTime(int);
     void showMoves(int);
 };
 
-#endif // PUZZLEFORM_H
+

@@ -9,12 +9,12 @@
 
 GameEngine::GameEngine(QObject* parent)
     :QObject (parent)
-    , pM (new PuzzleManager(this))
-    , ui(new Ui::PuzzleForm)
-    , pF(new PuzzleForm(ui))
-    , sK(new ScoreKeeper(this))
 {
-    ui->setupUi(pF);
+    ui=new Ui::PuzzleForm;
+    pF=new PuzzleForm(ui);
+    pM=new PuzzleManager(ui,this);
+    sK=new ScoreKeeper(this);
+
     for (int i=1;i<=15;i++)
     {
         QPushButton* puzButt=pF->findChild<QPushButton*>(QString("pushButton_%1").arg(i));
@@ -31,7 +31,6 @@ GameEngine::GameEngine(QObject* parent)
     connect(this,SIGNAL(callTryAgain()),sK,SLOT(reset()));
     connect(this,SIGNAL(cheatTest()),pM,SLOT(onCheat()));
 
-    connect(pM,SIGNAL(assignedOrder(const QVariant&)),pF,SLOT(arrangePuzzle(const QVariant&)));
     connect(pM,SIGNAL(buttonMoved()),sK,SLOT(onMove()));
     connect(pM,SIGNAL(gameWon()),sK,SLOT(stopTracking()));
 

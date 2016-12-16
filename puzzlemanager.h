@@ -14,7 +14,6 @@ public:
     PuzzleManager(Ui::PuzzleForm *uiPuzForm, QObject* parent=nullptr);
 private:
     QStringList currentOrder, initialOrder, winningOrder;
-    void shuffleButtons();
     void checkWin();
     Ui::PuzzleForm *uiPuzForm=nullptr;
 private slots:

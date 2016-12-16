@@ -10,7 +10,6 @@ class ScoreHandler: public QObject
     Q_OBJECT
 public:
     ScoreHandler(Ui::CongratsWindow *ui, bool gameRegime, const QPair<int,int>& results, QObject* parent=nullptr);
-
 private:
     int gameTime;
     int gameMoves;

@@ -154,6 +154,7 @@ void StaticFunctions::shuffleList(QStringList& initialOrder)
     }
     initialOrder<<" ";
 }
+
 QStringList StaticFunctions::getWinningOrder()
 {
     QStringList wO;

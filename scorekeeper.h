@@ -17,7 +17,7 @@ private:
     int numberOfMoves;
     int elapsedSeconds;
     QBasicTimer timer;
-    Ui::PuzzleForm *uiPF;
+    Ui::PuzzleForm *uiPF=nullptr;
 private slots:
     void reset();
     void stopTracking();
@@ -25,8 +25,6 @@ private slots:
 protected:
     void timerEvent(QTimerEvent *event) override;
 signals:
-    void reportTime(int);
-    void reportMoves(int);
     void reportScore(const QPair<int,int>&);
 
 };

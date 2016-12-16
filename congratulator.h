@@ -24,7 +24,4 @@ private:
     CongratulatorUI *conWindow=nullptr;
     Ui::CongratsWindow *ui=nullptr;
     void setConnections();
-signals:
-    void initScoreHandler(const QPair<int,int>&);
-    void initScoreHandlerNoRecord(const QPair<int,int>&);
 };

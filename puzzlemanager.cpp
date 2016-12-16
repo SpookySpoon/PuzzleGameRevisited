@@ -26,13 +26,7 @@ void PuzzleManager::onRestart()
     StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
 }
 
-void PuzzleManager::onCheat()
-{
-    currentOrder=winningOrder;
-    currentOrder.replace(15,QString("pushButton_15"));
-    currentOrder.replace(14,QString(" "));
-    StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
-}
+
 
 void PuzzleManager::onPushedButton()
 {
@@ -51,4 +45,19 @@ void PuzzleManager::checkWin()
     {
         emit gameWon();
     }
+}
+
+
+
+
+
+
+
+//чит для быстрого вызова окна статистики
+void PuzzleManager::onCheat()
+{
+    currentOrder=winningOrder;
+    currentOrder.replace(15,QString("pushButton_15"));
+    currentOrder.replace(14,QString(" "));
+    StaticFunctions::transPuzOrder(currentOrder,uiPuzForm);
 }

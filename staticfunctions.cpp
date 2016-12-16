@@ -154,4 +154,14 @@ void StaticFunctions::shuffleList(QStringList& initialOrder)
     }
     initialOrder<<" ";
 }
+QStringList StaticFunctions::getWinningOrder()
+{
+    QStringList wO;
+    for (int i=1;i<=15;i++)
+    {
+        wO<<QString("pushButton_%1").arg(i);
+    }
+    wO<<" ";
+    return wO;
+}
 

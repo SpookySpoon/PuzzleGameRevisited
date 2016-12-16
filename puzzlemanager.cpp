@@ -8,11 +8,7 @@
 PuzzleManager::PuzzleManager(Ui::PuzzleForm *someUiPuzForm, QObject* parent)
     :QObject(parent), uiPuzForm(someUiPuzForm)
 {
-    for (int i=1;i<=15;i++)
-    {
-        winningOrder<<QString("pushButton_%1").arg(i);
-    }
-    winningOrder<<" ";
+    winningOrder=StaticFunctions::getWinningOrder();
     currentOrder=winningOrder;
     initialOrder=winningOrder;
 }

@@ -15,4 +15,5 @@ public:
     static bool puzzleMover(QStringList& order, const QString& button);
     static void transPuzOrder(const QStringList& order, Ui::PuzzleForm* someUiPuzForm);
     static void shuffleList(QStringList& initialOrder);
+    static QStringList getWinningOrder();
 };

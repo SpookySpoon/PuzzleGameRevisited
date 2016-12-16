@@ -18,7 +18,6 @@ public:
 private:
     Ui::PuzzleForm *ui=nullptr;
 private slots:
-//    void arrangePuzzle(const QVariant&);
     void showTime(int);
     void showMoves(int);
 };

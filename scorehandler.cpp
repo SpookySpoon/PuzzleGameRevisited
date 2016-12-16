@@ -4,9 +4,20 @@
 #include <QDebug>
 #include <QDateTime>
 
-ScoreHandler::ScoreHandler(Ui::CongratsWindow *ui, QObject *parent)
+ScoreHandler::ScoreHandler(Ui::CongratsWindow *ui, bool gameRegime, const QPair<int,int>& results, QObject *parent)
     :QObject (parent),conWinUI(ui)
-{}
+{
+    if(gameRegime)
+    {
+        conWinUI->lableCheers->setText("Congratulations, you've solved a broblem!!");
+        StaticFunctions::updateScore(results.first,results.second);
+    }
+    else
+    {
+        ui->lableCheers->setText("Nice practise, now go play it for real!");
+    }
+    initScoreData(results);
+}
 
 void ScoreHandler::initScoreData(const QPair<int,int>& results)
 {

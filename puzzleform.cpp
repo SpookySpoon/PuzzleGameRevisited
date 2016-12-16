@@ -20,7 +20,6 @@ void PuzzleForm::showTime(int someTime)
     ui->lableElapsedTime->setText(QString("Time: %1").arg(QDateTime::fromTime_t(someTime).toUTC().toString("hh:mm:ss")));
 }
 
-
 void PuzzleForm::showMoves(int someMoves)
 {
     ui->labelMoves->setText(QString("Moves: %1").arg(someMoves));

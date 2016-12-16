@@ -12,33 +12,19 @@ Congratulator::Congratulator(const QPair<int,int>& results, bool regime, QObject
 
 Congratulator::~Congratulator()
 {
-    qDebug()<<"destroy";
     if(!conWindow->isHidden())
     {
-        qDebug()<<"hide";
         conWindow->hide();
     }
     conWindow->deleteLater();
-    delete ui;
 }
 
 void Congratulator::setUpCongratulator()
 {
     ui=new Ui::CongratsWindow;
     conWindow = new CongratulatorUI(ui);
-    ui->setupUi(conWindow);
-    sHandler = new ScoreHandler(ui,this);
+    sHandler = new ScoreHandler(ui, gameRegime, stats, this);
     setConnections();
-    if(gameRegime)
-    {
-        ui->lableCheers->setText("Congratulations, you've solved a broblem!!");
-        StaticFunctions::updateScore(stats.first,stats.second);
-    }
-    else
-    {
-        ui->lableCheers->setText("Nice practise, now go play it for real!");
-    }
-    sHandler->initScoreData(stats);
     conWindow->exec();
 }
 

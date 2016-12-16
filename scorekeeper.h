@@ -3,16 +3,21 @@
 #include <QObject>
 #include <QBasicTimer>
 
+namespace Ui {
+class PuzzleForm;
+}
+
 
 class ScoreKeeper: public QObject
 {
     Q_OBJECT
 public:
-    ScoreKeeper(QObject* parent=nullptr);
+    ScoreKeeper(Ui::PuzzleForm *ui, QObject* parent=nullptr);
 private:
     int numberOfMoves;
     int elapsedSeconds;
     QBasicTimer timer;
+    Ui::PuzzleForm *uiPF;
 private slots:
     void reset();
     void stopTracking();

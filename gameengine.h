@@ -25,7 +25,7 @@ private slots:
     void newGame();
     void tryAgain();
     void cheat();
-    void onWin(const QPair<int,int>& stats);
+    void onWin(QPair<int,int> stats);
     void close();
 signals:
     void callNewGame();

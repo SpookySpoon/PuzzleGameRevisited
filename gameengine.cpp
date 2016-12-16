@@ -13,7 +13,7 @@ GameEngine::GameEngine(QObject* parent)
     ui=new Ui::PuzzleForm;
     pF=new PuzzleForm(ui);
     pM=new PuzzleManager(ui,this);
-    sK=new ScoreKeeper(this);
+    sK=new ScoreKeeper(ui, this);
 
     for (int i=1;i<=15;i++)
     {
@@ -34,9 +34,7 @@ GameEngine::GameEngine(QObject* parent)
     connect(pM,SIGNAL(buttonMoved()),sK,SLOT(onMove()));
     connect(pM,SIGNAL(gameWon()),sK,SLOT(stopTracking()));
 
-    connect(sK,SIGNAL(reportScore(const QPair<int,int>&)),this,SLOT(onWin(const QPair<int,int>&)));
-    connect(sK,SIGNAL(reportMoves(int)),pF,SLOT(showMoves(int)));
-    connect(sK,SIGNAL(reportTime(int)),pF,SLOT(showTime(int)));
+    connect(sK,SIGNAL(reportScore(QPair<int,int>)),this,SLOT(onWin(QPair<int,int>)));
 
     pF->show();
     emit callNewGame();
@@ -64,7 +62,7 @@ bool GameEngine::getRegime() const
     return gameRegime;
 }
 
-void GameEngine::onWin(const QPair<int,int>& results)
+void GameEngine::onWin(QPair<int,int> results)
 {
     Congratulator* congratsWindow=new Congratulator(results, gameRegime, this);
     congratsWindow->setObjectName(QString("Congratulator"));

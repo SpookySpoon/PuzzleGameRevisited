@@ -10,6 +10,7 @@ class CongratulatorUI: public QDialog
     Q_OBJECT
 public:
     explicit CongratulatorUI(Ui::CongratsWindow *ui,  QWidget* parent = nullptr);
+    ~CongratulatorUI();
 private:
     Ui::CongratsWindow *ui;
 protected:

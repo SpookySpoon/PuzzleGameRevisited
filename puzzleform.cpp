@@ -1,5 +1,3 @@
-#include <QDateTime>
-#include <QDebug>
 #include "puzzleform.h"
 #include "ui_puzzleform.h"
 

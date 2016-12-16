@@ -1,5 +1,3 @@
-#include <QDateTime>
-#include <QDebug>
 #include <QCloseEvent>
 #include "congratulatorui.h"
 #include "ui_congratswindow.h"

@@ -1,6 +1,4 @@
 #include "congratulator.h"
-#include <QDebug>
-#include "staticfunctions.h"
 #include "congratulatorui.h"
 #include "ui_congratswindow.h"
 #include "scorehandler.h"

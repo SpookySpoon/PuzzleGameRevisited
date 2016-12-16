@@ -1,7 +1,8 @@
-#include "scorekeeper.h"
-#include "ui_puzzleform.h"
 #include <QDateTime>
 #include <QTimerEvent>
+#include "scorekeeper.h"
+#include "ui_puzzleform.h"
+
 
 ScoreKeeper::ScoreKeeper(Ui::PuzzleForm *ui, QObject* parent)
     :QObject(parent), uiPF(ui)

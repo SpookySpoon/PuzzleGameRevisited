@@ -1,11 +1,11 @@
+#include <QPushButton>
 #include "gameengine.h"
 #include "puzzlemanager.h"
 #include "ui_puzzleform.h"
 #include "congratulator.h"
 #include "puzzleform.h"
 #include "scorekeeper.h"
-#include <QDebug>
-#include <QPushButton>
+
 
 GameEngine::GameEngine(QObject* parent)
     :QObject (parent)

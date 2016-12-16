@@ -1,7 +1,5 @@
 #pragma once
 #include <QList>
-#include <QLayoutItem>
-#include <QMap>
 namespace Ui {
 class PuzzleForm;
 }

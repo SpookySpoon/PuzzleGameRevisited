@@ -1,6 +1,5 @@
 #include <QFile>
 #include <QMap>
-#include <QDebug>
 #include <QTextStream>
 #include <QMessageBox>
 #include <time.h>

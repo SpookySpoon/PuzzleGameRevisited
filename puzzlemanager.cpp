@@ -1,5 +1,3 @@
-#include <QDebug>
-#include <QMessageBox>
 #include "puzzlemanager.h"
 #include "staticfunctions.h"
 #include "ui_puzzleform.h"

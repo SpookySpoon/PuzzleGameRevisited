@@ -1,8 +1,5 @@
 #pragma once
-
 #include <QWidget>
-#include <QPushButton>
-#include <QMap>
 
 namespace Ui {
 class PuzzleForm;

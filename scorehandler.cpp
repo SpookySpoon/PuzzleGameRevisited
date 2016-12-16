@@ -1,8 +1,8 @@
+#include <QDateTime>
 #include "scorehandler.h"
 #include "staticfunctions.h"
 #include "ui_congratswindow.h"
-#include <QDebug>
-#include <QDateTime>
+
 
 ScoreHandler::ScoreHandler(Ui::CongratsWindow *ui, bool gameRegime, const QPair<int,int>& results, QObject *parent)
     :QObject (parent),conWinUI(ui)

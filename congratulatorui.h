@@ -14,13 +14,6 @@ private:
     Ui::CongratsWindow *ui;
 protected:
     void closeEvent(QCloseEvent *event) override;
-private slots:
-    void setGameTime(int);
-    void setGameMoves(int);
-    void setBestGameTime(int);
-    void setBestGameMoves(int);
-    void setBestComboGameTime(int);
-    void setBestComboGameMoves(int);
 signals:
     void isClosed();
 };

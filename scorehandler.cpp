@@ -1,48 +1,34 @@
 #include "scorehandler.h"
 #include "staticfunctions.h"
+#include "ui_congratswindow.h"
 #include <QDebug>
+#include <QDateTime>
 
-ScoreHandler::ScoreHandler(QObject *parent):QObject (parent)
+ScoreHandler::ScoreHandler(Ui::CongratsWindow *ui, QObject *parent)
+    :QObject (parent),conWinUI(ui)
 {}
 
 void ScoreHandler::initScoreData(const QPair<int,int>& results)
 {
-    StaticFunctions::updateScore(results.first,results.second);
-    inputData(results);
-    emit statsReady();
-}
-
-void ScoreHandler::initScoreDataNoRecord(const QPair<int,int>& results)
-{
-    inputData(results);
-    emit statsReady();
+    gameTime=results.first;
+    gameMoves=results.second;
+    inputData();
 }
 
 void ScoreHandler::resetHistory()
 {
     StaticFunctions::resetScore(gameTime,gameMoves);
-    QPair<int,int> currentStats(gameTime,gameMoves);
-    inputData(currentStats);
+    inputData();
 }
 
-void ScoreHandler::inputData(const QPair<int,int>& results)
+void ScoreHandler::inputData()
 {
-    gameTime=results.first;
-    gameMoves=results.second;
     QList<int> history=StaticFunctions::getScore();
-    bestGameTime=history.at(0);
-    bestGameMoves=history.at(1);
-    bestComboGameTime=history.at(2);
-    bestComboGameMoves=history.at(3);
-    reportData();
+    conWinUI->lableCurScoreTime->setText(QString("Time: %1").arg(QDateTime::fromTime_t(gameTime).toUTC().toString("hh:mm:ss")));
+    conWinUI->lableCurScoreMoves->setText(QString("Number of moves: %1").arg(gameMoves));
+    conWinUI->lableHistBTime->setText(QString("Your best time: %1").arg(QDateTime::fromTime_t(history.at(0)).toUTC().toString("hh:mm:ss")));
+    conWinUI->lableHistBMoves->setText(QString("The least number of moves: %1").arg(history.at(1)));
+    conWinUI->lableHistComboTime->setText(QString("Time: %1").arg(QDateTime::fromTime_t(history.at(2)).toUTC().toString("hh:mm:ss")));
+    conWinUI->lableHistComboMoves->setText(QString("Number of moves: %1").arg(history.at(3)));
 }
 
-void ScoreHandler::reportData()
-{
-    emit reportGameTime(gameTime);
-    emit reportGameMoves(gameMoves);
-    emit reportBestGameTime(bestGameTime);
-    emit reportBestGameMoves(bestGameMoves);
-    emit reportBestComboGameTime(bestComboGameTime);
-    emit reportBestComboGameMoves(bestComboGameMoves);
-}
